@@ -11,11 +11,11 @@ import org.springframework.web.client.RestTemplate;
 public class ConvertService implements ConvertRepository {
 
     @Value("${Getgeoapi.api.key}")
-    private String api_key;
+    private String apiKey;
 
     public ResponseEntity<Object> convertCurrency(String from, String to, double amount) {
         String apiUrl = "https://api.getgeoapi.com/v2/currency/convert";
-        String url = "%s?api_key=%s&from=%s&to=%s&amount=%s&format=json".formatted(apiUrl,api_key,from,to,amount);
+        String url = "%s?api_key=%s&from=%s&to=%s&amount=%s&format=json".formatted(apiUrl, apiKey,from,to,amount);
         RestTemplate restTemplate = new RestTemplate();
 
         return ResponseEntity.ok(restTemplate.getForObject(url,Object.class,from,to,amount));
