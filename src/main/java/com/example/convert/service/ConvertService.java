@@ -2,13 +2,17 @@ package com.example.convert.service;
 
 import com.example.convert.repository.ConvertRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ConvertService implements ConvertRepository {
+public class ConvertService {
+
+    @Autowired
+    private ConvertRepository convertRepo;
 
     @Value("${Getgeoapi.api.key}")
     private String apiKey;
