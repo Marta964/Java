@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConvertRepository extends CrudRepository<ConvertEntity,Long> {
-    // ResponseEntity<Object> convertCurrency(String from, String to, double amount);
 
-    ConvertEntity findCourse(String from,String to);
 }
