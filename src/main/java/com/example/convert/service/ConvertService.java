@@ -1,8 +1,5 @@
 package com.example.convert.service;
 
-
-import com.example.convert.repository.ConvertRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
