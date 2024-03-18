@@ -1,12 +1,11 @@
 package com.example.convert.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import jakarta.persistence.*;
-import lombok.*;
+
 
 @Entity
-@Table(name="convert")
+@Table(name = "convert")
 public class ConvertEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,28 +19,28 @@ public class ConvertEntity {
         this.amountTo = amountTo;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
-        this.id=id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public double getAmountFrom(){
+    public double getAmountFrom() {
         return amountFrom;
     }
 
-    public void setAmountFrom(double amountFrom){
-        this.amountFrom=amountFrom;
+    public void setAmountFrom(double amountFrom) {
+        this.amountFrom = amountFrom;
     }
 
-    public double getAmountTo(){
+    public double getAmountTo() {
         return amountTo;
     }
 
-    public void setAmountTo(double amountTo){
-        this.amountTo=amountTo;
+    public void setAmountTo(double amountTo) {
+        this.amountTo = amountTo;
     }
 }
 

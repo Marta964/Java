@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class ConvertController {
 
     private final ConvertService service;
+
     @Autowired
-    public ConvertController(ConvertService service){
+    public ConvertController(ConvertService service) {
         this.service = service;
     }
 
