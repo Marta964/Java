@@ -11,14 +11,6 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ConvertService {
 
-
-    private ConvertRepository convertRepo;
-
-    @Autowired
-    public ConvertService(ConvertRepository convertRepo) {
-        this.convertRepo = convertRepo;
-    }
-
     @Value("${Getgeoapi.api.key}")
     private String apiKey;
 
