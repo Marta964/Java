@@ -26,7 +26,7 @@ public class ConvertController {
 
 
     @PostMapping
-    public ResponseEntity convertation(@RequestBody Convert convertation){
+    public ResponseEntity<Object> convertation(@RequestBody Convert convertation){
         try{
             service.convertation(convertation);
             return ResponseEntity.ok("Work");
@@ -36,7 +36,7 @@ public class ConvertController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteConvertation(@PathVariable Long id){
+    public ResponseEntity<Object> deleteConvertation(@PathVariable Long id){
         return ResponseEntity.ok(service.delete(id));
     }
 }
