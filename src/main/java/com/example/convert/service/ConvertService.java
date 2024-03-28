@@ -1,24 +1,37 @@
 package com.example.convert.service;
 
+import com.example.convert.model.Convert;
+import com.example.convert.repository.ConvertRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
+import com.example.convert.model.ConvertionRersponse;
 @Service
 public class ConvertService {
 
-    @Value("${Getgeoapi.api.key}")
+    @Autowired
+    private ConvertRepository convertRepo;
+
+    @Value("${exchangerate-api.key}")
     private String apiKey;
 
-    public ResponseEntity<Object> convertCurrency(String from, String to, double amount) {
-        String apiUrl = "https://api.getgeoapi.com/v2/currency/convert";
-        String url = "%s?api_key=%s&from=%s&to=%s&amount=%s&format=json".formatted(apiUrl, apiKey, from, to, amount);
+    public Convert convertation(Convert convertation){
 
-        RestTemplate restTemplate = new RestTemplate();
-
-        return ResponseEntity.ok(restTemplate.getForObject(url, Object.class, from, to, amount));
+        return convertRepo.save(convertation);
     }
 
+    public ConvertionRersponse convertCurrency(String from, String to, double amount) {
+        String apiUrl="https://v6.exchangerate-api.com/v6";
+        String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl,apiKey,from,to,amount);
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, ConvertionRersponse.class, from, to, amount);
+    }
+
+    public Long delete(Long id){
+        convertRepo.deleteById(id);
+        return id;
+    }
 
 }

@@ -1,10 +1,11 @@
 package com.example.convert.controller;
 
+import com.example.convert.model.Convert;
 import com.example.convert.service.ConvertService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.convert.model.ConvertionRersponse;
 
 @RestController
 @RequestMapping("/convert")
@@ -19,7 +20,23 @@ public class ConvertController {
 
     @GetMapping
     public ResponseEntity<Object> convertCurrency(@RequestParam String from, @RequestParam String to, @RequestParam double amount) {
-        return new ResponseEntity<>(service.convertCurrency(from, to, amount), HttpStatus.OK);
+        ConvertionRersponse a = service.convertCurrency(from,to,amount);
+        return ResponseEntity.ok(a);
     }
 
+
+    @PostMapping
+    public ResponseEntity convertation(@RequestBody Convert convertation){
+        try{
+            service.convertation(convertation);
+            return ResponseEntity.ok("Work");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteConvertation(@PathVariable Long id){
+        return ResponseEntity.ok(service.delete(id));
+    }
 }
