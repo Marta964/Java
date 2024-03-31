@@ -4,42 +4,46 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ConvertionRersponse {
 
-    @JsonProperty
-    private String base_code;
-    private String target_code;
-    private float conversion_rate;
-    private float conversion_result;
 
-    public String getBase_code() {
-        return base_code;
+    @JsonProperty("base_code")
+    private String baseCode;
+    @JsonProperty("target_code")
+    private String targetCode;
+    @JsonProperty("conversion_rate")
+    private float conversionRate;
+    @JsonProperty("conversion_result")
+    private float conversionResult;
+
+    public String getBaseCode() {
+        return baseCode;
     }
 
-    public void setBase_code(String base_code) {
-        this.base_code = base_code;
+    public void setBaseCode(String baseCode) {
+        this.baseCode = baseCode;
     }
 
-    public String getTarget_code() {
-        return target_code;
+    public String getTargetCode() {
+        return targetCode;
     }
 
-    public void setTarget_code(String target_code) {
-        this.target_code = target_code;
+    public void setTargetCode(String targetCode) {
+        this.targetCode = targetCode;
     }
 
-    public float getConversion_rate() {
-        return conversion_rate;
+    public float getConversionRate() {
+        return conversionRate;
     }
 
-    public void setConversion_rate(float conversion_rate) {
-        this.conversion_rate = conversion_rate;
+    public void setConversionRate(float conversionRate) {
+        this.conversionRate = conversionRate;
     }
 
-    public float getConversion_result() {
-        return conversion_result;
+    public float getConversionResult() {
+        return conversionResult;
     }
 
-    public void setConversion_result(float conversion_result) {
-        this.conversion_result = conversion_result;
+    public void setConversionResult(float conversionResult) {
+        this.conversionResult = conversionResult;
     }
 }
 
