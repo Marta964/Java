@@ -12,14 +12,30 @@ public class ExchangeRate {
     private Long id;
     private String data;
     private String currencies;
-    private float exchangeRate;
+    private float rate;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "exchangeRate")
     private List<Convert> convertations;
 
     public ExchangeRate(String data, float exchangeRate) {
         this.data = data;
-        this.exchangeRate = exchangeRate;
+        this.rate = exchangeRate;
+    }
+
+    public String getCurrencies() {
+        return currencies;
+    }
+
+    public void setCurrencies(String currencies) {
+        this.currencies = currencies;
+    }
+
+    public List<Convert> getConvertations() {
+        return convertations;
+    }
+
+    public void setConvertations(List<Convert> convertations) {
+        this.convertations = convertations;
     }
 
     public Long getId() {
@@ -38,12 +54,12 @@ public class ExchangeRate {
         this.data = data;
     }
 
-    public float getExchangeRate() {
-        return exchangeRate;
+    public float getRate() {
+        return rate;
     }
 
-    public void setExchangeRate(float exchangeRate) {
-        this.exchangeRate = exchangeRate;
+    public void setRate(float rate) {
+        this.rate = rate;
     }
 
 }

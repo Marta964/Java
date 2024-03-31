@@ -10,14 +10,16 @@ import com.example.convert.model.ConvertionRersponse;
 @Service
 public class ConvertService {
 
-    @Autowired
     private ConvertRepository convertRepo;
 
     @Value("${exchangerate-api.key}")
     private String apiKey;
 
+    @Autowired
+    public ConvertService(ConvertRepository convertRepo){
+        this.convertRepo=convertRepo;
+    }
     public Convert convertation(Convert convertation){
-
         return convertRepo.save(convertation);
     }
 
