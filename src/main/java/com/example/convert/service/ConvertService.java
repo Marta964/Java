@@ -1,15 +1,18 @@
 package com.example.convert.service;
 
 import com.example.convert.model.Convert;
+import com.example.convert.model.ConvertionResponse;
+import com.example.convert.model.ExchangeRate;
 import com.example.convert.repository.ConvertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.example.convert.model.ConvertionRersponse;
+
+import java.util.List;
+
 @Service
 public class ConvertService {
-
     private ConvertRepository convertRepo;
 
     @Value("${exchangerate-api.key}")
@@ -19,21 +22,50 @@ public class ConvertService {
     public ConvertService(ConvertRepository convertRepo){
         this.convertRepo=convertRepo;
     }
-    public Convert convertation(Convert convertation){
-        return convertRepo.save(convertation);
-    }
 
-    public ConvertionRersponse convertCurrency(String from, String to, double amount) {
+    public ConvertionResponse convertCurrency(String from, String to, float amount) {
         String apiUrl="https://v6.exchangerate-api.com/v6";
         String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl,apiKey,from,to,amount);
 
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, ConvertionRersponse.class, from, to, amount);
+        return restTemplate.getForObject(url, ConvertionResponse.class, from, to, amount);
     }
 
-    public Long delete(Long id){
+
+
+
+    public void addConversation(String from,String to,float amount){
+        String apiUrl="https://v6.exchangerate-api.com/v6";
+        String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl,apiKey,from,to,amount);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ConvertionResponse c = restTemplate.getForObject(url, ConvertionResponse.class, from, to, amount);
+
+        Convert convert = new Convert(amount,c.getConversionResult());
+        convertRepo.save(convert);
+
+        ExchangeRate rate = restTemplate.getForObject(url,ExchangeRate.class,from,to);
+        //exchangeRateRepo.save(rate);
+    }
+
+
+    public List<Convert> getAllConverions(){
+        return convertRepo.findAll();
+    }
+    public Convert getConversionById(Long id){
+        return convertRepo.findById(id).orElse(null);
+    }
+
+    public void updateConversion(Long Id,float amount){
+        Convert c = convertRepo.findById(Id).orElse(null);
+        c.setAmountFrom(amount);
+       // c.setAmountTo(); amount*exchangeRate
+    }
+    public void deleteAllConversions(){
+        convertRepo.deleteAll();
+    }
+    public Long deleteConversionById(Long id){
         convertRepo.deleteById(id);
         return id;
     }
-
 }
