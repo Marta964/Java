@@ -35,20 +35,16 @@ public class ConvertController {
         return service.getAllConverions();
     }
 
+    @PutMapping("/{id}")
+    public void updateConversion(@PathVariable Long id,@RequestParam float amount){
+        service.updateConversion(id,amount);
+    }
+
     @GetMapping("/{id}")
     public Convert getConversionById(@PathVariable Long id){
         return service.getConversionById(id);
     }
 
-
-    @PostMapping("/add")
-    public void addConversation(@RequestParam String from, @RequestParam String to, @RequestParam float amount){
-        service.addConversation(from,to,amount);
-    }
-    @PutMapping("/{id}")
-    public void updateConversion(@PathVariable Long id,@RequestParam float amount){
-        service.updateConversion(id,amount);
-    }
 
     @DeleteMapping("/all")
     public void deleteAllConversions(){

@@ -14,9 +14,9 @@ public class ExchangeRate {
     @JsonProperty("time_last_update_utc")
     private String data;
     @JsonProperty("base_code")
-    private String From;
+    private String from;
     @JsonProperty("target_code")
-    private String To;
+    private String to;
     @JsonProperty("conversion_rate")
     private float rate;
 
@@ -25,25 +25,25 @@ public class ExchangeRate {
 
     public ExchangeRate(String data, String from, String to, float rate) {
         this.data = data;
-        From = from;
-        To = to;
+        from = from;
+        to = to;
         this.rate = rate;
     }
 
     public String getFrom() {
-        return From;
+        return from;
     }
 
     public void setFrom(String from) {
-        From = from;
+        from = from;
     }
 
     public String getTo() {
-        return To;
+        return to;
     }
 
     public void setTo(String to) {
-        To = to;
+        to = to;
     }
 
     public List<Convert> getConvertations() {

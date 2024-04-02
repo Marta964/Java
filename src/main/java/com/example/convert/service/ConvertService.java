@@ -31,30 +31,15 @@ public class ConvertService {
         return restTemplate.getForObject(url, ConvertionResponse.class, from, to, amount);
     }
 
-
-
-
-    public void addConversation(String from,String to,float amount){
-        String apiUrl="https://v6.exchangerate-api.com/v6";
-        String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl,apiKey,from,to,amount);
-
-        RestTemplate restTemplate = new RestTemplate();
-        ConvertionResponse c = restTemplate.getForObject(url, ConvertionResponse.class, from, to, amount);
-
-        Convert convert = new Convert(amount,c.getConversionResult());
-        convertRepo.save(convert);
-
-        ExchangeRate rate = restTemplate.getForObject(url,ExchangeRate.class,from,to);
-        //exchangeRateRepo.save(rate);
-    }
-
-
+    
     public List<Convert> getAllConverions(){
         return convertRepo.findAll();
     }
+
     public Convert getConversionById(Long id){
         return convertRepo.findById(id).orElse(null);
     }
+
 
     public void updateConversion(Long Id,float amount){
         Convert c = convertRepo.findById(Id).orElse(null);

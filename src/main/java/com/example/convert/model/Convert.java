@@ -1,7 +1,6 @@
 package com.example.convert.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 
