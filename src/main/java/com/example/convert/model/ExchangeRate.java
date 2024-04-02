@@ -35,7 +35,7 @@ public class ExchangeRate {
     }
 
     public void setFrom(String from) {
-        from = from;
+        this.from = from;
     }
 
     public String getTo() {
@@ -43,7 +43,7 @@ public class ExchangeRate {
     }
 
     public void setTo(String to) {
-        to = to;
+        this.to = to;
     }
 
     public List<Convert> getConvertations() {

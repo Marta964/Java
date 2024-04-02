@@ -34,11 +34,7 @@ public class ConvertController {
     public List<Convert> getAllConversions(){
         return service.getAllConverions();
     }
-
-    @PutMapping("/{id}")
-    public void updateConversion(@PathVariable Long id,@RequestParam float amount){
-        service.updateConversion(id,amount);
-    }
+    
 
     @GetMapping("/{id}")
     public Convert getConversionById(@PathVariable Long id){

@@ -31,7 +31,7 @@ public class ConvertService {
         return restTemplate.getForObject(url, ConvertionResponse.class, from, to, amount);
     }
 
-    
+
     public List<Convert> getAllConverions(){
         return convertRepo.findAll();
     }
@@ -40,12 +40,6 @@ public class ConvertService {
         return convertRepo.findById(id).orElse(null);
     }
 
-
-    public void updateConversion(Long Id,float amount){
-        Convert c = convertRepo.findById(Id).orElse(null);
-        c.setAmountFrom(amount);
-       // c.setAmountTo(); amount*exchangeRate
-    }
     public void deleteAllConversions(){
         convertRepo.deleteAll();
     }
