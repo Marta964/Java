@@ -2,7 +2,6 @@ package com.example.convert.service;
 
 import com.example.convert.model.Convert;
 import com.example.convert.model.ConvertionResponse;
-import com.example.convert.model.ExchangeRate;
 import com.example.convert.repository.ConvertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

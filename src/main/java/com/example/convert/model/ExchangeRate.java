@@ -25,8 +25,8 @@ public class ExchangeRate {
 
     public ExchangeRate(String data, String from, String to, float rate) {
         this.data = data;
-        from = from;
-        to = to;
+        this.from = from;
+        this.to = to;
         this.rate = rate;
     }
 

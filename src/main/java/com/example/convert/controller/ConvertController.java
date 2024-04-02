@@ -34,7 +34,7 @@ public class ConvertController {
     public List<Convert> getAllConversions(){
         return service.getAllConverions();
     }
-    
+
 
     @GetMapping("/{id}")
     public Convert getConversionById(@PathVariable Long id){
