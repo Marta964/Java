@@ -1,8 +1,6 @@
 package com.example.convert.model;
 
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "convert")
@@ -10,24 +8,24 @@ public class Convert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private float amountFrom;
-    private float amountTo;
+    private Float amountFrom;
+    private Float amountTo;
     @ManyToOne
     @JoinColumn(name = "exchangeRateId")
-    private ExchangeRate exchangeRate;
+    private ExchangeRate rate;
 
-
-    public Convert(float amountFrom, float amountTo) {
+    public Convert(Float amountFrom,Float amountTo, ExchangeRate exchangeRate) {
         this.amountFrom = amountFrom;
         this.amountTo = amountTo;
+        this.rate = exchangeRate;
+    }
+    public Convert(){}
+    public ExchangeRate getRate() {
+        return rate;
     }
 
-    public ExchangeRate getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(ExchangeRate exchangeRate) {
-        this.exchangeRate = exchangeRate;
+    public void setRate(ExchangeRate rate) {
+        this.rate = rate;
     }
 
     public Long getId() {
@@ -38,19 +36,19 @@ public class Convert {
         this.id = id;
     }
 
-    public float getAmountFrom() {
+    public Float getAmountFrom() {
         return amountFrom;
     }
 
-    public void setAmountFrom(float amountFrom) {
+    public void setAmountFrom(Float amountFrom) {
         this.amountFrom = amountFrom;
     }
 
-    public float getAmountTo() {
+    public Float getAmountTo() {
         return amountTo;
     }
 
-    public void setAmountTo(float amountTo) {
+    public void setAmountTo(Float amountTo) {
         this.amountTo = amountTo;
     }
 }

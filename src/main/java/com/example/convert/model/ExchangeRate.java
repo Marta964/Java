@@ -18,17 +18,21 @@ public class ExchangeRate {
     @JsonProperty("target_code")
     private String to;
     @JsonProperty("conversion_rate")
-    private float rate;
+    private Float rate;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "exchangeRate")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "rate")
     private List<Convert> convertations;
 
-    public ExchangeRate(String data, String from, String to, float rate) {
+    public ExchangeRate(String data, String from, String to, Float rate) {
         this.data = data;
         this.from = from;
         this.to = to;
         this.rate = rate;
     }
+    public ExchangeRate(){
+
+    }
+
 
     public String getFrom() {
         return from;
@@ -70,12 +74,13 @@ public class ExchangeRate {
         this.data = data;
     }
 
-    public float getRate() {
+    public Float getRate() {
         return rate;
     }
 
-    public void setRate(float rate) {
+    public void setRate(Float rate) {
         this.rate = rate;
     }
 
+    public void setRate(){}
 }

@@ -3,20 +3,31 @@ package com.example.convert.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ConvertionResponse {
+    @JsonProperty("time_last_update_utc")
+    private String time;
     @JsonProperty("base_code")
     private String baseCode;
     @JsonProperty("target_code")
     private String targetCode;
     @JsonProperty("conversion_rate")
-    private float conversionRate;
+    private Float conversionRate;
     @JsonProperty("conversion_result")
-    private float conversionResult;
+    private Float conversionResult;
 
-    public ConvertionResponse(String baseCode, String targetCode, float conversionRate, float conversionResult) {
+    public ConvertionResponse(String time, String baseCode, String targetCode, Float conversionRate, Float conversionResult) {
+        this.time = time;
         this.baseCode = baseCode;
         this.targetCode = targetCode;
         this.conversionRate = conversionRate;
         this.conversionResult = conversionResult;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getBaseCode() {
@@ -35,19 +46,19 @@ public class ConvertionResponse {
         this.targetCode = targetCode;
     }
 
-    public float getConversionRate() {
+    public Float getConversionRate() {
         return conversionRate;
     }
 
-    public void setConversionRate(float conversionRate) {
+    public void setConversionRate(Float conversionRate) {
         this.conversionRate = conversionRate;
     }
 
-    public float getConversionResult() {
+    public Float getConversionResult() {
         return conversionResult;
     }
 
-    public void setConversionResult(float conversionResult) {
+    public void setConversionResult(Float conversionResult) {
         this.conversionResult = conversionResult;
     }
 }
