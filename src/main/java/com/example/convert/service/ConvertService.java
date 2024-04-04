@@ -36,8 +36,7 @@ public class ConvertService {
 
     public Convert createConversation(Long id,Float amountFrom){
         ExchangeRate rate = exchangeRateRepo.findById(id).orElse(null);
-
-        Convert convert = new Convert(amountFrom,amountFrom*rate.getRate(),rate);
+        Convert convert = new Convert(amountFrom, amountFrom * rate.getRate(), rate);
         convertRepo.save(convert);
         return convert;
     }

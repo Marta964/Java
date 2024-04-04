@@ -2,9 +2,9 @@ package com.example.convert.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
-
 @Entity
 @Table(name="exchangeRate")
 public class ExchangeRate {
@@ -81,6 +81,4 @@ public class ExchangeRate {
     public void setRate(Float rate) {
         this.rate = rate;
     }
-
-    public void setRate(){}
 }
