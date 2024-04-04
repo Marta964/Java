@@ -1,7 +1,6 @@
 package com.example.convert.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 
 @Entity

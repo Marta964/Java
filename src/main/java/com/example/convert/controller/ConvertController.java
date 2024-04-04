@@ -38,8 +38,8 @@ public class ConvertController {
         return service.updateConversion(id,amount);
     }
     @GetMapping("/all")
-    public List<Convert> getAllConversions(){
-        return service.getAllConverions();
+    public List<Convert> getAllConvertations(){
+        return service.getAllConvertations();
     }
 
     @GetMapping("/{id}")

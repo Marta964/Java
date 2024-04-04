@@ -36,18 +36,25 @@ public class ConvertService {
 
     public Convert createConversation(Long id,Float amountFrom){
         ExchangeRate rate = exchangeRateRepo.findById(id).orElse(null);
-        Convert convert = new Convert(amountFrom, amountFrom * rate.getRate(), rate);
+        Convert convert = new Convert();
+        if(rate!=null){
+        convert.setAmountFrom(amountFrom);
+        convert.setAmountTo(amountFrom*rate.getRate());
+        convert.setRate(rate);
         convertRepo.save(convert);
+        }
         return convert;
     }
 
     public Convert updateConversion(Long id,Float amount){
         Convert convert = convertRepo.findById(id).orElse(null);
-        convert.setAmountFrom(amount);
-        convert.setAmountTo(amount * convert.getRate().getRate());
+        if(convert!=null) {
+            convert.setAmountFrom(amount);
+            convert.setAmountTo(amount * convert.getRate().getRate());
+        }
         return convert;
     }
-    public List<Convert> getAllConverions(){
+    public List<Convert> getAllConvertations(){
         return convertRepo.findAll();
     }
 

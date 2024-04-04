@@ -28,14 +28,15 @@ public class ExchangeRateService {
 
         RestTemplate restTemplate = new RestTemplate();
         ExchangeRate rate = restTemplate.getForObject(url,ExchangeRate.class,from,to);
-        exchangeRateRepo.save(rate);
+        if(rate!=null){
+        exchangeRateRepo.save(rate);}
         return rate;
     }
 
     @Transactional
     public ExchangeRate updateExchangeRate(Long id,Float exchangeRate){
        ExchangeRate rate = exchangeRateRepo.findById(id).orElse(null);
-       rate.setRate(exchangeRate);
+       if (rate!=null){rate.setRate(exchangeRate);}
        return rate;
     }
 
