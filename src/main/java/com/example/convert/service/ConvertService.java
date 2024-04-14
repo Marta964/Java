@@ -1,10 +1,11 @@
 package com.example.convert.service;
 
 import com.example.convert.model.Convert;
-import com.example.convert.model.ConvertionResponse;
+import com.example.convert.model.ConversionResponse;
 import com.example.convert.model.ExchangeRate;
 import com.example.convert.repository.ConvertRepository;
 import com.example.convert.repository.ExchangeRateRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,51 +22,52 @@ public class ConvertService {
     private String apiKey;
 
     @Autowired
-    public ConvertService(ConvertRepository convertRepo,ExchangeRateRepository exchangeRateRepo){
-        this.convertRepo=convertRepo;
-        this.exchangeRateRepo=exchangeRateRepo;
+    public ConvertService(ConvertRepository convertRepo, ExchangeRateRepository exchangeRateRepo) {
+        this.convertRepo = convertRepo;
+        this.exchangeRateRepo = exchangeRateRepo;
     }
 
-    public ConvertionResponse convertCurrency(String from, String to, Float amount) {
-        String apiUrl="https://v6.exchangerate-api.com/v6";
-        String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl,apiKey,from,to,amount);
+    public ConversionResponse convertCurrency(String from, String to, Float amount) {
+        String apiUrl = "https://v6.exchangerate-api.com/v6";
+        String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl, apiKey, from, to, amount);
 
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, ConvertionResponse.class, from, to, amount);
+        return restTemplate.getForObject(url, ConversionResponse.class, from, to, amount);
     }
 
-    public Convert createConversation(Long id,Float amountFrom){
+    public Convert createConversation(Long id,Float amountFrom) {
         ExchangeRate rate = exchangeRateRepo.findById(id).orElse(null);
         Convert convert = new Convert();
-        if(rate!=null){
+        if(rate != null) {
         convert.setAmountFrom(amountFrom);
-        convert.setAmountTo(amountFrom*rate.getRate());
+        convert.setAmountTo(amountFrom * rate.getRate());
         convert.setRate(rate);
         convertRepo.save(convert);
         }
         return convert;
     }
 
-    public Convert updateConversion(Long id,Float amount){
+    @Transactional
+    public Convert updateConversion(Long id, Float amount){
         Convert convert = convertRepo.findById(id).orElse(null);
-        if(convert!=null) {
+        if (convert != null) {
             convert.setAmountFrom(amount);
             convert.setAmountTo(amount * convert.getRate().getRate());
         }
         return convert;
     }
-    public List<Convert> getAllConvertations(){
+    public List<Convert> getAllConvertations() {
         return convertRepo.findAll();
     }
 
-    public Convert getConversionById(Long id){
+    public Convert getConversionById(Long id) {
         return convertRepo.findById(id).orElse(null);
     }
 
-    public void deleteAllConversions(){
+    public void deleteAllConversions() {
         convertRepo.deleteAll();
     }
-    public void deleteConversionById(Long id){
+    public void deleteConversionById(Long id) {
         convertRepo.deleteById(id);
     }
 }
