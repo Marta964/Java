@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class ExchangeRateServiceTest {
+class ExchangeRateServiceTest {
     @Mock
     private ExchangeRateRepository exchangeRateRepo;
     @Mock

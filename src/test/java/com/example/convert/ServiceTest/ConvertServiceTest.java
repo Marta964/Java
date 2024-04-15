@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class ConvertServiceTest {
+class ConvertServiceTest {
     @Mock
     private ConvertRepository convertRepo;
     @Mock
