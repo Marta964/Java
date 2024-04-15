@@ -2,11 +2,13 @@ package com.example.convert.controller;
 
 import com.example.convert.model.ExchangeRate;
 import com.example.convert.service.ExchangeRateService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Tag(name = "ExchangeRate",description = "Managing exchange rates.")
 @RestController
 @RequestMapping("/exchangerate")
 public class ExchangeRateController {
@@ -20,6 +22,12 @@ public class ExchangeRateController {
     @PostMapping()
     public ExchangeRate createExchangeRate(@RequestParam final String from, @RequestParam final String to) {
         return exchangeRateService.createExchangeRate(from, to);
+    }
+
+    @PostMapping("/bulk")
+    public ResponseEntity<List<ExchangeRate>> createBulkExchangeRates(@RequestBody List<ExchangeRate> rates) {
+        List<ExchangeRate> createdRates = exchangeRateService.createBulkExchangeRates(rates);
+        return ResponseEntity.ok(createdRates);
     }
 
     @PutMapping("/{id}")

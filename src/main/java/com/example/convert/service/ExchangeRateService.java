@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -66,6 +67,13 @@ public class ExchangeRateService {
         }
         cache.put(RATE + rate.getId().toString(), rate);
         return rate;
+    }
+
+    public List<ExchangeRate> createBulkExchangeRates(List<ExchangeRate> rates) {
+        List<ExchangeRate> existingRates = rates.stream().filter(rate->exchangeRateRepo.existsByRate(rate.getRate())).toList();
+        List<ExchangeRate> createdRates = rates.stream().filter(rate->!exchangeRateRepo.existsByRate(rate.getRate())).map(exchangeRateRepo::save).toList();
+        existingRates.forEach(rate->LOG.warn("Rate with rate '{}' already existed",rate.getRate()));
+        return  createdRates;
     }
 
     /**

@@ -30,7 +30,7 @@ public class ExceptionGlobal {
         return ResponseEntity.status(
                 HttpStatus.BAD_REQUEST).body("400 Bad Request");
     }
-     /**
+    /**
      * Обрабатывает исключение типа RuntimeException
      * и возвращает ответ с кодом состояния 500.
      *

@@ -2,13 +2,14 @@ package com.example.convert.controller;
 
 import com.example.convert.model.Convert;
 import com.example.convert.service.ConvertService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.convert.model.ConversionResponse;
 
 import java.util.List;
-
+@Tag(name = "Conversions",description = "Managing conversions.")
 @RestController
 @RequestMapping("/convert")
 public class ConvertController {

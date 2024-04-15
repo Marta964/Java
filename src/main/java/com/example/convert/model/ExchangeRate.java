@@ -29,4 +29,11 @@ public class ExchangeRate {
     @JsonIgnoreProperties("rate")
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "rate")
     private List<Convert> conversions;
+
+    public ExchangeRate(String data, String from, String to, Float rate) {
+        this.data = data;
+        this.from = from;
+        this.to = to;
+        this.rate = rate;
+    }
 }
