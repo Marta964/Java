@@ -36,7 +36,7 @@ public class ExchangeRateServiceTest {
     }
 
     @Test
-    public void testGetExchangeRateByPair() {
+    void testGetExchangeRateByPair() {
         List<ExchangeRate> testRates = new ArrayList<>();
         String from = "USD";
         String to = "EUR";
@@ -96,7 +96,7 @@ public class ExchangeRateServiceTest {
     }
 
     @Test
-    public void testGetExchangeRateById() {
+    void testGetExchangeRateById() {
         Long id = 1L;
         ExchangeRate exchangeRate = new ExchangeRate();
 
@@ -120,7 +120,7 @@ public class ExchangeRateServiceTest {
     }
 
     @Test
-    public void testDeleteAllExchangeRate() {
+    void testDeleteAllExchangeRate() {
         exchangeRateService.deleteAllExchangeRate();
 
         Mockito.verify(exchangeRateRepo, Mockito.times(1)).deleteAll();

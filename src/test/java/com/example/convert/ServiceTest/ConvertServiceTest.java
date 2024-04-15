@@ -37,7 +37,7 @@ public class ConvertServiceTest {
     }
 
     @Test
-    public void testConvertCurrency() {
+    void testConvertCurrency() {
         RestTemplate restTemplate = new RestTemplate();
         String from = "USD";
         String to = "EUR";
@@ -56,7 +56,7 @@ public class ConvertServiceTest {
     }
 
     @Test
-    public void testCreateConversion() {
+    void testCreateConversion() {
         Long id = 1L;
         Float amountFrom = 100f;
         ExchangeRate rate = new ExchangeRate();
@@ -76,7 +76,7 @@ public class ConvertServiceTest {
     }
 
     @Test
-    public void testUpdateConversion() {
+    void testUpdateConversion() {
         Long id = 1L;
         Float amount = 200f;
         ExchangeRate rate = new ExchangeRate();
@@ -98,7 +98,7 @@ public class ConvertServiceTest {
     }
 
     @Test
-    public void testGetAllConversations() {
+    void testGetAllConversations() {
         List<Convert> expectedConverts = new ArrayList<>();
         when(convertRepo.findAll()).thenReturn(expectedConverts);
 
@@ -108,7 +108,7 @@ public class ConvertServiceTest {
     }
 
     @Test
-    public void testGetConversionById() {
+    void testGetConversionById() {
         Long id = 1L;
         Convert expectedConvert = new Convert();
         expectedConvert.setId(id);
@@ -121,13 +121,13 @@ public class ConvertServiceTest {
     }
 
     @Test
-    public void testDeleteAllConversions() {
+    void testDeleteAllConversions() {
         convertService.deleteAllConversions();
         verify(convertRepo, times(1)).deleteAll();
     }
 
     @Test
-    public void testDeleteConversionById() {
+    void testDeleteConversionById() {
         Long id = 1L;
         convertService.deleteConversionById(id);
         verify(convertRepo, times(1)).deleteById(id);
