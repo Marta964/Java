@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class SwaggerConfigTest {
+class SwaggerConfigTest {
     @Test
     void testSwaggerConfig() {
         // Arrange
