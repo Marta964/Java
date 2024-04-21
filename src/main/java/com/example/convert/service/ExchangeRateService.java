@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +26,15 @@ public class ExchangeRateService {
             LoggerFactory.getLogger(ExchangeRateService.class);
     private static final String RATE = "rate";
 
+    @Autowired
+    public ExchangeRateService(final ExchangeRateRepository exchangeRateRepo,
+                               final CacheManager<String, Object> cache) {
+        this.exchangeRateRepo = exchangeRateRepo;
+        this.cache = cache;
+    }
+
+    @Value("${exchangerate-api.key}")
+    private String apiKey;
     /**
      * Возвращает все курсы по базовой и котируемой валютах.
      *
@@ -34,7 +45,6 @@ public class ExchangeRateService {
     public List<ExchangeRate> getExchangeRateByPair(final String from, final String to) {
         return exchangeRateRepo.getExchangeRateByPair(from, to);
     }
-
     /**
      *Запрашивает курс валют из API и сохраняет курс в базу данных и кэш.
      *
@@ -43,7 +53,7 @@ public class ExchangeRateService {
      * @return курс валют.
      */
     public ExchangeRate createExchangeRate(final String from, final String to) {
-        String apiKey ="d8f0d82781014c6a4bddaec0";
+
         String apiUrl = "https://v6.exchangerate-api.com/v6";
         String url = "%s/%s/pair/%s/%s".formatted(apiUrl, apiKey, from, to);
 
