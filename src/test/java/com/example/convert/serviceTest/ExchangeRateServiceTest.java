@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
@@ -59,6 +60,15 @@ class ExchangeRateServiceTest {
 
         verify(exchangeRateRepo,times(1)).save(testRate);
     }
+    /*@Test
+    void createExchangeRateTest() {
+        ExchangeRate testRate = new ExchangeRate();
+        when(exchangeRateRepo.save(testRate)).thenReturn(testRate);
+
+        ExchangeRate result = exchangeRateService.createExchangeRate("USD","BYN");
+
+        assertEquals(testRate,result);
+    }*/
     @Test
     void TestCreateBulkExchangeRates(){
         List<ExchangeRate> rates = new ArrayList<>();

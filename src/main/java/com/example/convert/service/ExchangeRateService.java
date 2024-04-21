@@ -63,15 +63,11 @@ public class ExchangeRateService {
 
     public List<ExchangeRate> createBulkExchangeRates(final List<ExchangeRate> rates) {
         List<ExchangeRate> existingRates = rates.stream().
-                filter(rate -> exchangeRateRepo.existsByRate(rate.getRate()) &&
-                exchangeRateRepo.existsByFrom(rate.getFrom()) &&
-                exchangeRateRepo.existsByTo(rate.getTo()))
+                filter(rate -> exchangeRateRepo.existsByRate(rate.getRate()) && exchangeRateRepo.existsByFrom(rate.getFrom()) && exchangeRateRepo.existsByTo(rate.getTo()))
                 .toList();
         List<ExchangeRate> createdRates = rates.stream()
                 .filter(rate ->
-                        !exchangeRateRepo.existsByRate(rate.getRate()) ||
-                        !exchangeRateRepo.existsByFrom(rate.getFrom()) ||
-                        !exchangeRateRepo.existsByTo(rate.getTo()))
+                        !exchangeRateRepo.existsByRate(rate.getRate()) || !exchangeRateRepo.existsByFrom(rate.getFrom()) || !exchangeRateRepo.existsByTo(rate.getTo()))
                 .map(exchangeRateRepo::save).toList();
         existingRates.forEach(rate->LOG.warn("Rate with rate '{}' already existed",rate.getRate()));
         return  createdRates;

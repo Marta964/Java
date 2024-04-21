@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CounterServiceTest {
+class CounterServiceTest {
     @Test
-    public void testIncrementRequestCount() {
+    void testIncrementRequestCount() {
         // Arrange
         int initialCount = CounterService.getRequestCount();
 
@@ -19,7 +19,7 @@ public class CounterServiceTest {
     }
 
     @Test
-    public void testGetRequestCount() {
+    void testGetRequestCount() {
         // Arrange
         int expectedCount = CounterService.getRequestCount();
 
