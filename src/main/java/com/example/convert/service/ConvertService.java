@@ -22,23 +22,17 @@ public class ConvertService {
     private String apiKey;
 
     @Autowired
-    public ConvertService(ConvertRepository convertRepo, ExchangeRateRepository exchangeRateRepo) {
+    public ConvertService(final ConvertRepository convertRepo,
+                          final ExchangeRateRepository exchangeRateRepo) {
         this.convertRepo = convertRepo;
         this.exchangeRateRepo = exchangeRateRepo;
     }
 
-    public ConversionResponse convertCurrency(String from, String to, Float amount) {
-        String apiUrl = "https://v6.exchangerate-api.com/v6";
-        String url = "%s/%s/pair/%s/%s/%s".formatted(apiUrl, apiKey, from, to, amount);
 
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, ConversionResponse.class, from, to, amount);
-    }
-
-    public Convert createConversation(Long id,Float amountFrom) {
+    public Convert createConversation(final Long id, final Float amountFrom) {
         ExchangeRate rate = exchangeRateRepo.findById(id).orElse(null);
         Convert convert = new Convert();
-        if(rate != null) {
+        if (rate != null) {
         convert.setAmountFrom(amountFrom);
         convert.setAmountTo(amountFrom * rate.getRate());
         convert.setRate(rate);
@@ -48,7 +42,7 @@ public class ConvertService {
     }
 
     @Transactional
-    public Convert updateConversion(Long id, Float amount){
+    public Convert updateConversion(final Long id, final Float amount) {
         Convert convert = convertRepo.findById(id).orElse(null);
         if (convert != null) {
             convert.setAmountFrom(amount);
@@ -56,18 +50,19 @@ public class ConvertService {
         }
         return convert;
     }
-    public List<Convert> getAllConvertations() {
+
+    public List<Convert> getAllConversions() {
         return convertRepo.findAll();
     }
 
-    public Convert getConversionById(Long id) {
+    public Convert getConversionById(final Long id) {
         return convertRepo.findById(id).orElse(null);
     }
 
     public void deleteAllConversions() {
         convertRepo.deleteAll();
     }
-    public void deleteConversionById(Long id) {
+    public void deleteConversionById(final Long id) {
         convertRepo.deleteById(id);
     }
 }

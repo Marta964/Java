@@ -21,14 +21,18 @@ public class ExchangeRateController {
     }
 
     @PostMapping()
-    public ExchangeRate createExchangeRate(@RequestParam final String from, @RequestParam final String to) {
-        return exchangeRateService.createExchangeRate(from, to);
+    public ResponseEntity<ExchangeRate> createExchangeRate(@RequestParam final String from, @RequestParam final String to) {
+        ExchangeRate rates = exchangeRateService.createExchangeRate(from, to);
+        return ResponseEntity.ok(rates);
+    }
+    @PostMapping("/body")
+    public ExchangeRate create(@RequestBody ExchangeRate rate) {
+        return exchangeRateService.create(rate);
     }
 
     @PostMapping("/bulk")
-    public ResponseEntity<List<ExchangeRate>> createBulkExchangeRates(@RequestBody List<ExchangeRate> rates) {
-        List<ExchangeRate> createdRates = exchangeRateService.createBulkExchangeRates(rates);
-        return ResponseEntity.ok(createdRates);
+    public List<ExchangeRate>createBulkExchangeRates(@RequestBody final List<ExchangeRate> rates) {
+        return exchangeRateService.createBulkExchangeRates(rates);
     }
 
     @PutMapping("/{id}")

@@ -14,4 +14,6 @@ public interface ExchangeRateRepository extends CrudRepository<ExchangeRate,Long
     List<ExchangeRate> getExchangeRateByPair(@Param("from")String from,@Param("to")String to);
     List<ExchangeRate> findAll();
     boolean existsByRate(Float rate);
+    boolean existsByFrom(String from);
+    boolean existsByTo(String to);
 }

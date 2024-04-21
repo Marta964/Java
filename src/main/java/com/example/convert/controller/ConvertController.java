@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.convert.model.ConversionResponse;
 
 import java.util.List;
-@Tag(name = "Conversions",description = "Managing conversions.")
+@Tag(name = "Conversions", description = "Managing conversions.")
 @RestController
 @RequestMapping("/convert")
 public class ConvertController {
@@ -21,23 +21,20 @@ public class ConvertController {
         this.service = service;
     }
 
-    @GetMapping()
-    public ResponseEntity<Object> convertCurrency(@RequestParam final String from, @RequestParam final String to, @RequestParam final Float amount) {
-        ConversionResponse a = service.convertCurrency(from, to, amount);
-        return ResponseEntity.ok(a);
-    }
 
     @PostMapping("/{id}")
-    public Convert createConversation(@PathVariable final Long id, @RequestParam final Float amountFrom) {
+    public Convert createConversation(@PathVariable final Long id,
+                                      @RequestParam final Float amountFrom) {
         return service.createConversation(id, amountFrom);
     }
     @PutMapping("/{id}")
-    public Convert updateConversion(@PathVariable final Long id, @RequestParam final Float amount) {
+    public Convert updateConversion(@PathVariable final Long id,
+                                    @RequestParam final Float amount) {
         return service.updateConversion(id, amount);
     }
     @GetMapping("/all")
     public List<Convert> getAllConvertations() {
-        return service.getAllConvertations();
+        return service.getAllConversions();
     }
 
     @GetMapping("/{id}")

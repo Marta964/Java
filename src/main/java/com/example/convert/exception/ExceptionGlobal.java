@@ -1,5 +1,6 @@
 package com.example.convert.exception;
 
+import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @ControllerAdvice
@@ -27,8 +32,9 @@ public class ExceptionGlobal {
             final HttpClientErrorException ex,
             final WebRequest request) {
         LOGGER.error("400 Bad Request");
-        return ResponseEntity.status(
-                HttpStatus.BAD_REQUEST).body("400 Bad Request");
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("error", "400 Bad Request");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
     /**
      * Обрабатывает исключение типа RuntimeException
@@ -43,8 +49,9 @@ public class ExceptionGlobal {
             final RuntimeException ex,
             final WebRequest request) {
         LOGGER.error("500 Internal Server Error");
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("error", "500 Internal Server Error");
         return ResponseEntity.status(
-                HttpStatus.INTERNAL_SERVER_ERROR).body(
-                "500 Internal Server Error");
+                HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
     }
 }
